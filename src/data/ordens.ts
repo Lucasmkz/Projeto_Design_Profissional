@@ -1,0 +1,268 @@
+import type { OrdemServico } from '@/types/ordem';
+
+// Dados fictícios usados na demonstração.
+export const ordensIniciais: OrdemServico[] = [
+  {
+    codigo: 'VLZ-1042',
+    cliente: { nome: 'Mariana Teles Albuquerque', telefone: '(41) 99000-1042' },
+    veiculo: { modelo: 'Fiat Argo Drive 1.3', placa: 'RVZ4E21', ano: 2019 },
+    mecanico: 'Rogério Antunes',
+    elevador: 2,
+    status: 'aguardando_aprovacao',
+    previsaoEntrega: '2026-10-06T17:00:00-03:00',
+    historico: [
+      {
+        status: 'recebido',
+        data: '2026-10-05T08:10:00-03:00',
+        observacao: 'Cliente relatou barulho ao frear e chiado ao ligar o carro.',
+      },
+      { status: 'diagnostico', data: '2026-10-05T08:45:00-03:00' },
+      {
+        status: 'aguardando_aprovacao',
+        data: '2026-10-05T10:20:00-03:00',
+        observacao: 'Orçamento enviado ao cliente pelo WhatsApp.',
+      },
+    ],
+    itens: [
+      {
+        id: 'i1',
+        descricao: 'Pastilhas de freio dianteiras',
+        tipo: 'peca',
+        valor: 189.9,
+        justificativa:
+          'As pastilhas estão com menos de 2 mm. O barulho que você ouve é o metal raspando no disco. Se não trocar, o carro demora mais para parar e o disco também estraga.',
+        fotoUrl: '/pecas/pastilha-freio.svg',
+        urgente: true,
+        aprovacao: 'pendente',
+      },
+      {
+        id: 'i2',
+        descricao: 'Mão de obra: troca das pastilhas',
+        tipo: 'mao_de_obra',
+        valor: 120,
+        justificativa:
+          'Desmontar as rodas da frente, trocar as pastilhas, limpar o sistema de freio e testar na rua.',
+        urgente: true,
+        aprovacao: 'pendente',
+      },
+      {
+        id: 'i3',
+        descricao: 'Correia do alternador',
+        tipo: 'peca',
+        valor: 145,
+        justificativa:
+          'A correia está ressecada e com pequenas rachaduras. É ela que faz o chiado ao ligar. Ainda funciona, mas vale trocar nos próximos meses para não arrebentar na rua.',
+        fotoUrl: '/pecas/correia.svg',
+        urgente: false,
+        aprovacao: 'pendente',
+      },
+      {
+        id: 'i4',
+        descricao: 'Mão de obra: troca da correia',
+        tipo: 'mao_de_obra',
+        valor: 80,
+        justificativa:
+          'Remover a correia antiga, instalar a nova e ajustar a tensão. Aproveitando que o carro já está aqui, sai mais barato fazer agora.',
+        urgente: false,
+        aprovacao: 'pendente',
+      },
+    ],
+  },
+  {
+    codigo: 'VLZ-1043',
+    cliente: { nome: 'Henrique Sabóia Prado', telefone: '(41) 99000-1043' },
+    veiculo: { modelo: 'Chevrolet Onix LT 1.0', placa: 'SBK7C35', ano: 2020 },
+    mecanico: 'Juliana Prates',
+    elevador: 1,
+    status: 'em_servico',
+    previsaoEntrega: '2026-10-05T18:00:00-03:00',
+    historico: [
+      { status: 'recebido', data: '2026-10-04T14:00:00-03:00' },
+      {
+        status: 'diagnostico',
+        data: '2026-10-04T14:30:00-03:00',
+        observacao: 'Carro batendo na suspensão em lombadas.',
+      },
+      { status: 'aguardando_aprovacao', data: '2026-10-04T16:10:00-03:00' },
+      {
+        status: 'em_servico',
+        data: '2026-10-05T08:00:00-03:00',
+        observacao: 'Cliente aprovou tudo pelo link. Peças chegaram do fornecedor.',
+      },
+    ],
+    itens: [
+      {
+        id: 'i1',
+        descricao: 'Par de amortecedores dianteiros',
+        tipo: 'peca',
+        valor: 780,
+        justificativa:
+          'Os amortecedores estão vazando óleo e não seguram mais o carro. Por isso ele bate nas lombadas e fica instável nas curvas.',
+        fotoUrl: '/pecas/amortecedor.svg',
+        urgente: true,
+        aprovacao: 'aprovado',
+      },
+      {
+        id: 'i2',
+        descricao: 'Mão de obra: troca dos amortecedores',
+        tipo: 'mao_de_obra',
+        valor: 260,
+        justificativa: 'Desmontar a suspensão dianteira, instalar os novos amortecedores e alinhar.',
+        urgente: true,
+        aprovacao: 'aprovado',
+      },
+    ],
+  },
+  {
+    codigo: 'VLZ-1044',
+    cliente: { nome: 'Patrícia Lunardi Ribas', telefone: '(41) 99000-1044' },
+    veiculo: { modelo: 'Hyundai HB20 Comfort 1.0', placa: 'QWT2B88', ano: 2018 },
+    mecanico: 'Fabiano Lacerda',
+    elevador: 4,
+    status: 'pronto',
+    previsaoEntrega: '2026-10-05T12:00:00-03:00',
+    historico: [
+      { status: 'recebido', data: '2026-10-04T09:00:00-03:00' },
+      { status: 'diagnostico', data: '2026-10-04T09:20:00-03:00' },
+      { status: 'aguardando_aprovacao', data: '2026-10-04T10:00:00-03:00' },
+      { status: 'em_servico', data: '2026-10-04T10:35:00-03:00' },
+      {
+        status: 'pronto',
+        data: '2026-10-05T11:15:00-03:00',
+        observacao: 'Carro lavado e liberado para retirada.',
+      },
+    ],
+    itens: [
+      {
+        id: 'i1',
+        descricao: 'Filtro de óleo',
+        tipo: 'peca',
+        valor: 42,
+        justificativa:
+          'O filtro segura a sujeira do óleo. Ele é trocado junto com o óleo para o motor durar mais.',
+        fotoUrl: '/pecas/filtro-oleo.svg',
+        urgente: false,
+        aprovacao: 'aprovado',
+      },
+      {
+        id: 'i2',
+        descricao: 'Mão de obra: troca de óleo e filtro',
+        tipo: 'mao_de_obra',
+        valor: 70,
+        justificativa: 'Escoar o óleo velho, trocar o filtro e completar com óleo novo.',
+        urgente: false,
+        aprovacao: 'aprovado',
+      },
+      {
+        id: 'i3',
+        descricao: 'Par de discos de freio traseiros',
+        tipo: 'peca',
+        valor: 360,
+        justificativa:
+          'Os discos estão com pequenos riscos, mas ainda dentro da medida. Dá para esperar a próxima revisão.',
+        fotoUrl: '/pecas/disco-freio.svg',
+        urgente: false,
+        aprovacao: 'recusado',
+      },
+    ],
+  },
+  {
+    codigo: 'VLZ-1045',
+    cliente: { nome: 'Otávio Brandalise Kunz', telefone: '(41) 99000-1045' },
+    veiculo: { modelo: 'Volkswagen Gol 1.6', placa: 'PRM9D14', ano: 2015 },
+    mecanico: 'Everton Siqueira',
+    elevador: 3,
+    status: 'diagnostico',
+    previsaoEntrega: '2026-10-07T17:00:00-03:00',
+    historico: [
+      {
+        status: 'recebido',
+        data: '2026-10-05T09:30:00-03:00',
+        observacao: 'Luz da injeção acesa e motor falhando em marcha lenta.',
+      },
+      { status: 'diagnostico', data: '2026-10-05T11:00:00-03:00' },
+    ],
+    itens: [],
+  },
+  {
+    codigo: 'VLZ-1046',
+    cliente: { nome: 'Renata Coimbra Vasques', telefone: '(41) 99000-1046' },
+    veiculo: { modelo: 'Toyota Corolla XEi 2.0', placa: 'TFA3H67', ano: 2017 },
+    mecanico: 'Caio Menegat',
+    elevador: 5,
+    status: 'aguardando_aprovacao',
+    previsaoEntrega: '2026-10-06T12:00:00-03:00',
+    historico: [
+      { status: 'recebido', data: '2026-10-04T15:40:00-03:00' },
+      { status: 'diagnostico', data: '2026-10-04T16:15:00-03:00' },
+      {
+        status: 'aguardando_aprovacao',
+        data: '2026-10-04T17:30:00-03:00',
+        observacao: 'Cliente recusou o disco e ainda não respondeu sobre o amortecedor.',
+      },
+    ],
+    itens: [
+      {
+        id: 'i1',
+        descricao: 'Par de discos de freio dianteiros',
+        tipo: 'peca',
+        valor: 410,
+        justificativa:
+          'Os discos estão levemente empenados, por isso o volante treme um pouco ao frear forte. Não é perigoso agora, mas tende a piorar.',
+        fotoUrl: '/pecas/disco-freio.svg',
+        urgente: false,
+        aprovacao: 'recusado',
+      },
+      {
+        id: 'i2',
+        descricao: 'Amortecedor traseiro esquerdo',
+        tipo: 'peca',
+        valor: 395,
+        justificativa:
+          'O amortecedor quebrou por dentro e a traseira do carro balança demais. Isso aumenta a distância de frenagem e o risco em curvas.',
+        fotoUrl: '/pecas/amortecedor.svg',
+        urgente: true,
+        aprovacao: 'pendente',
+      },
+    ],
+  },
+  {
+    codigo: 'VLZ-1041',
+    cliente: { nome: 'Gustavo Peretti Moura', telefone: '(41) 99000-1041' },
+    veiculo: { modelo: 'Renault Sandero 1.6', placa: 'QHJ6F02', ano: 2016 },
+    mecanico: 'Thiago Bortolini',
+    elevador: 3,
+    status: 'entregue',
+    previsaoEntrega: '2026-10-03T17:00:00-03:00',
+    historico: [
+      { status: 'recebido', data: '2026-10-02T08:00:00-03:00' },
+      { status: 'diagnostico', data: '2026-10-02T08:30:00-03:00' },
+      { status: 'aguardando_aprovacao', data: '2026-10-02T09:15:00-03:00' },
+      { status: 'em_servico', data: '2026-10-02T09:50:00-03:00' },
+      { status: 'pronto', data: '2026-10-03T15:20:00-03:00' },
+      { status: 'entregue', data: '2026-10-03T17:40:00-03:00' },
+    ],
+    itens: [
+      {
+        id: 'i1',
+        descricao: 'Correia dentada',
+        tipo: 'peca',
+        valor: 230,
+        justificativa:
+          'A correia chegou na quilometragem de troca. Se ela arrebentar, o motor pode sofrer danos caros.',
+        fotoUrl: '/pecas/correia.svg',
+        urgente: true,
+        aprovacao: 'aprovado',
+      },
+      {
+        id: 'i2',
+        descricao: 'Mão de obra: troca da correia dentada',
+        tipo: 'mao_de_obra',
+        valor: 280,
+        justificativa: 'Desmontar a parte da frente do motor, trocar a correia e acertar o ponto.',
+        urgente: true,
+        aprovacao: 'aprovado',
+      },
+    ],
+  },
+];
